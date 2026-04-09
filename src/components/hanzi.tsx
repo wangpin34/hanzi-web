@@ -1,16 +1,16 @@
-import { Flex, Section } from '@radix-ui/themes';
+import { Flex } from '@radix-ui/themes';
 import Char from './char';
 import Pinyin from './pinyin';
 
 
 export default function Hanzi({ hanzi }: { hanzi: string }) {
-  
+
   return (
-    <Section px="2" py="1">
-      <Flex  gap="2" align="center">
+    <Flex px="2" py="1" className="w-full" justify="center" align="center" data-name="hanzi" data-value={hanzi}>
+      <Flex gap="2" align="center" className="w-content">
         <Char hanzi={hanzi} />
         <Pinyin hanzi={hanzi} />
       </Flex>
-      </Section>
+      </Flex>
   )
 }

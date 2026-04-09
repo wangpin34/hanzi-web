@@ -1,7 +1,6 @@
+import { PlayIcon } from '@radix-ui/react-icons';
 import HanziWriter from 'hanzi-writer';
 import { useEffect, useRef } from 'react';
-
-
 
 export default function Char({ hanzi }: { hanzi: string }) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -23,8 +22,11 @@ export default function Char({ hanzi }: { hanzi: string }) {
   
   
   return (
-      <section>
-        <div ref={containerRef}></div>
-      </section>
+    <div className="group relative">
+       <div className="absolute top-0 left-0 w-full h-full p-[20px] invisible group-hover:visible">
+        <PlayIcon onClick={() => writer.current?.animateCharacter()} className="w-[60px] h-[60px]" />
+      </div>
+      <div ref={containerRef}></div>
+      </div>
   )
 }

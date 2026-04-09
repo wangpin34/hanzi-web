@@ -3,8 +3,6 @@ import "@radix-ui/themes/styles.css";
 import { TanStackDevtools } from '@tanstack/react-devtools';
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
 
 import appCss from '../styles.css?url';
 
@@ -43,9 +41,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
         <Theme>
-        <Header />
+      
         {children}
-          <Footer />
         </Theme>
         <TanStackDevtools
           config={{
