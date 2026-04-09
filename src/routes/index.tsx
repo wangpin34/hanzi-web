@@ -23,9 +23,8 @@ function App() {
     <main className="page-wrap px-4 pb-8 pt-14">
       <section className="mx-auto max-w-2xl">
         <TextField.Root placeholder="输入汉字" value={input} onChange={handleChange} onKeyDown={e => {
-          // on enter pressed
-          console.log('key:',e.key)
           if (e.key === 'Enter') {
+            e.preventDefault()
             setOpenSearch(true)
           }
        }}>
