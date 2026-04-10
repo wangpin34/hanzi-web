@@ -247,79 +247,6 @@ a {
   animation: rise-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.home-search {
-  min-height: calc(100vh - 7rem);
-}
-
-.home-search-hero {
-  min-height: calc(100vh - 10rem);
-  display: grid;
-  place-items: center;
-}
-
-.home-search-trigger {
-  width: min(100%, 34rem);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.9rem;
-  padding: 1rem 1.2rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: linear-gradient(165deg, var(--surface-strong), var(--surface));
-  color: var(--sea-ink-soft);
-  box-shadow:
-    0 1px 0 var(--inset-glint) inset,
-    0 24px 46px rgba(30, 90, 72, 0.12),
-    0 8px 20px rgba(23, 58, 64, 0.08);
-  cursor: text;
-  font: inherit;
-  font-size: 1.02rem;
-  justify-content: flex-start;
-  text-decoration: none;
-}
-
-.home-search-trigger:hover,
-.home-search-trigger:focus-visible {
-  color: var(--sea-ink);
-  border-color: color-mix(in oklab, var(--lagoon-deep) 36%, var(--line));
-  transform: translateY(-1px);
-  outline: none;
-}
-
-.home-search-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.home-search-back {
-  width: 2.75rem;
-  height: 2.75rem;
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: linear-gradient(165deg, var(--surface-strong), var(--surface));
-  color: var(--sea-ink);
-  box-shadow:
-    0 1px 0 var(--inset-glint) inset,
-    0 16px 32px rgba(30, 90, 72, 0.1),
-    0 4px 12px rgba(23, 58, 64, 0.06);
-}
-
-.home-search-back:hover,
-.home-search-back:focus-visible {
-  border-color: color-mix(in oklab, var(--lagoon-deep) 36%, var(--line));
-  transform: translateY(-1px);
-  outline: none;
-}
-
-.home-search-input {
-  width: 100%;
-}
-
 @keyframes rise-in {
   from {
     opacity: 0;
@@ -328,29 +255,5 @@ a {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@media (max-width: 640px) {
-  .home-search {
-    min-height: calc(100vh - 5.5rem);
-  }
-
-  .home-search-hero {
-    min-height: calc(100vh - 8rem);
-  }
-
-  .home-search-trigger {
-    padding: 0.95rem 1rem;
-    font-size: 0.98rem;
-  }
-
-  .home-search-bar {
-    gap: 0.55rem;
-  }
-
-  .home-search-back {
-    width: 2.5rem;
-    height: 2.5rem;
   }
 }

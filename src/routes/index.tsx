@@ -11,11 +11,11 @@ function App() {
   }, [navigate])
 
   return (
-    <main className="home-search page-wrap px-4 pb-8">
-      <section className="home-search-hero rise-in">
+    <main className="page-wrap min-h-[calc(100vh-7rem)] px-4 pb-8 max-sm:min-h-[calc(100vh-5.5rem)]">
+      <section className="rise-in grid min-h-[calc(100vh-10rem)] place-items-center max-sm:min-h-[calc(100vh-8rem)]">
         <Link
           to="/search"
-          className="home-search-trigger"
+          className="inline-flex w-full max-w-[34rem] items-center justify-start gap-4 rounded-full border border-[var(--line)] bg-[linear-gradient(165deg,var(--surface-strong),var(--surface))] px-5 py-4 text-[1.02rem] text-[var(--sea-ink-soft)] no-underline shadow-[inset_0_1px_0_var(--inset-glint),0_24px_46px_rgba(30,90,72,0.12),0_8px_20px_rgba(23,58,64,0.08)] transition-[background-color,color,border-color,transform] duration-180 ease-out hover:-translate-y-px hover:border-[color-mix(in_oklab,var(--lagoon-deep)_36%,var(--line))] hover:text-[var(--sea-ink)] focus-visible:-translate-y-px focus-visible:border-[color-mix(in_oklab,var(--lagoon-deep)_36%,var(--line))] focus-visible:text-[var(--sea-ink)] focus-visible:outline-none max-sm:px-4 max-sm:py-[0.95rem] max-sm:text-[0.98rem]"
           aria-label="输入汉字"
           onFocus={goToSearch}
         >
