@@ -1,6 +1,7 @@
 import { Flex } from '@radix-ui/themes';
 import Char from './char';
 import Pinyin from './pinyin';
+import Play from './play';
 
 
 export default function Hanzi({ hanzi }: { hanzi: string }) {
@@ -10,6 +11,8 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
       <Flex gap="2" align="center" className="w-content">
         <Char hanzi={hanzi} />
         <Pinyin hanzi={hanzi} />
+        <Play hanzi={hanzi} />
+
       </Flex>
       </Flex>
   )

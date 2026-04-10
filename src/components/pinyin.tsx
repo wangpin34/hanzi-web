@@ -34,5 +34,6 @@ export default function Pinyin({hanzi}: { hanzi: string }) {
 
   return (
    <Text size="8">{pinyinResult}</Text>
+   
   )
 }

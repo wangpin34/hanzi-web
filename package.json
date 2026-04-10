@@ -24,6 +24,8 @@
     "@tanstack/react-router-ssr-query": "latest",
     "@tanstack/react-start": "latest",
     "@tanstack/router-plugin": "^1.132.0",
+    "cnchar": "^3.2.6",
+    "cnchar-voice": "^3.2.6",
     "embla-carousel-react": "^8.6.0",
     "hanzi-writer": "^3.7.3",
     "lucide-react": "^0.545.0",
