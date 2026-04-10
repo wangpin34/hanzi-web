@@ -17,6 +17,9 @@ To build this application for production:
 pnpm build
 ```
 
+The build now prerenders the app and leaves a single static output in `dist/`.
+That folder is the deployable artifact for static hosting.
+
 ## Testing
 
 This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:

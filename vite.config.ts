@@ -12,7 +12,14 @@ const config = defineConfig({
     devtools(),
     tsconfigPaths({ projects: ['./tsconfig.json'] }),
     tailwindcss(),
-    tanstackStart(),
+    tanstackStart({
+      prerender: {
+        enabled: true,
+        crawlLinks: true,
+        concurrency: 14,
+        failOnError: true,
+      },
+    }),
     viteReact(),
   ],
 })
