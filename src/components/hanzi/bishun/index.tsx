@@ -65,12 +65,7 @@ export default function Bishun({
 						共 {numberToChinese(strokes.length)} 笔
 					</Text>
 				</Flex>
-				<Box
-					overflow="auto"
-					maxHeight="40vh"
-					minWidth="60vw"
-					className="m-auto"
-				>
+				<Box overflow="auto" maxHeight="40vh" className="m-auto">
 					<div className="grid grid-cols-[repeat(auto-fill,100px)] justify-center gap-4 px-2 py-4">
 						{stepStrokesNumbers.map((strokeNumber) => (
 							<Flex
