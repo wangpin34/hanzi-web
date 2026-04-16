@@ -1,10 +1,11 @@
 import SearchHanzi from "@/components/search-hanzi";
+import { useAuth } from "@/utils/auth-context";
+import { supabase } from "@/utils/supabase";
 import { ArrowLeftIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { TextField } from "@radix-ui/themes";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-const RECENT_SEARCHES_KEY = "hanzi-web-recent-searches";
 const MAX_RECENT_SEARCHES = 8;
 
 export const Route = createFileRoute("/search")({
@@ -15,43 +16,28 @@ function keepHanzi(str: string) {
 	return str.replace(/[^\p{Script=Han}]/gu, "");
 }
 
-function loadRecentSearches() {
-	if (typeof window === "undefined") {
-		return [] as Array<string>;
-	}
+async function loadRemoteRecentSearches(userId: string): Promise<string[]> {
+	const { data } = await supabase
+		.from("user_hanzi_history")
+		.select("hanzi")
+		.eq("created_by", userId)
+		.order("created_at", { ascending: false })
+		.limit(MAX_RECENT_SEARCHES);
 
-	try {
-		const stored = window.localStorage.getItem(RECENT_SEARCHES_KEY);
-
-		if (!stored) {
-			return [];
-		}
-
-		const parsed = JSON.parse(stored);
-
-		if (!Array.isArray(parsed)) {
-			return [];
-		}
-
-		return parsed
-			.map((value) => keepHanzi(String(value)))
-			.filter(Boolean)
-			.slice(0, MAX_RECENT_SEARCHES);
-	} catch {
-		return [];
-	}
+	return (data ?? [])
+		.map((row) => row.hanzi)
+		.filter((v): v is string => Boolean(v));
 }
 
-function saveRecentSearches(values: Array<string>) {
-	if (typeof window === "undefined") {
-		return;
-	}
-
-	window.localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(values));
+async function saveRemoteRecentSearch(userId: string, query: string) {
+	await supabase
+		.from("user_hanzi_history")
+		.insert({ hanzi: query, created_by: userId });
 }
 
 function SearchRoute() {
 	const navigate = useNavigate();
+	const { user } = useAuth();
 	const [input, setInput] = useState("");
 	const [openSearch, setOpenSearch] = useState(false);
 	const [recentSearches, setRecentSearches] = useState<Array<string>>([]);
@@ -64,34 +50,40 @@ function SearchRoute() {
 	}, []);
 
 	useEffect(() => {
-		setRecentSearches(loadRecentSearches());
-	}, []);
+		if (!user) return;
+		loadRemoteRecentSearches(user.id).then(setRecentSearches);
+	}, [user]);
 
 	const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 		setInput(e.target.value);
 	}, []);
 
-	const updateRecentSearches = useCallback((value: string) => {
-		const normalizedValue = keepHanzi(value);
+	const updateRecentSearches = useCallback(
+		(value: string, fromRecent = false) => {
+			const normalizedValue = keepHanzi(value);
 
-		if (!normalizedValue) {
-			return;
-		}
+			if (!normalizedValue) {
+				return;
+			}
 
-		setRecentSearches((currentValues) => {
-			const nextValues = [
-				normalizedValue,
-				...currentValues.filter((item) => item !== normalizedValue),
-			].slice(0, MAX_RECENT_SEARCHES);
+			setRecentSearches((currentValues) => {
+				const nextValues = [
+					normalizedValue,
+					...currentValues.filter((item) => item !== normalizedValue),
+				].slice(0, MAX_RECENT_SEARCHES);
 
-			saveRecentSearches(nextValues);
+				return nextValues;
+			});
 
-			return nextValues;
-		});
-	}, []);
+			if (!fromRecent && user) {
+				saveRemoteRecentSearch(user.id, normalizedValue);
+			}
+		},
+		[user],
+	);
 
 	const submitSearch = useCallback(
-		(value: string) => {
+		(value: string, fromRecent = false) => {
 			const normalizedValue = keepHanzi(value);
 
 			if (!normalizedValue) {
@@ -99,7 +91,7 @@ function SearchRoute() {
 			}
 
 			setInput(normalizedValue);
-			updateRecentSearches(normalizedValue);
+			updateRecentSearches(normalizedValue, fromRecent);
 			setIsRecentListVisible(false);
 			setOpenSearch(true);
 		},
@@ -130,7 +122,7 @@ function SearchRoute() {
 
 	const handleRecentSelect = useCallback(
 		(value: string) => {
-			submitSearch(value);
+			submitSearch(value, true);
 		},
 		[submitSearch],
 	);

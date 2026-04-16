@@ -1,4 +1,4 @@
-import { Flex, Grid, Separator } from "@radix-ui/themes";
+import { Flex, Grid, Separator, Text } from "@radix-ui/themes";
 import Bishun from "./bishun";
 import Char from "./bishun/char";
 import Pinyin from "./pinyin";
@@ -26,13 +26,14 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 					<Separator orientation="vertical" size="4" />
 					<Pinyin hanzi={hanzi} />
 					<Separator orientation="vertical" size="4" />
-					<Char
-						strokes={charData.strokes.slice(
-							charData.radStrokes[0],
-							charData.radStrokes[charData.radStrokes.length - 1],
-						)}
-						size={60}
-					/>
+					{charData.radStrokes ? (
+						<Char
+							strokes={charData.radStrokes.map((n) => charData.strokes[n])}
+							size={40}
+						/>
+					) : (
+						<Text size="1">独体字</Text>
+					)}
 				</Flex>
 				<Separator my="3" size="4" />
 				<Grid columns="2" gap="8" align="center">
