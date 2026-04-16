@@ -1,10 +1,12 @@
-import Hanzi from "@/components/hanzi";
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: <explanation> */
+
+import Hanzi from "#/components/hanzi";
 import {
 	ArrowLeftIcon,
 	ArrowRightIcon,
 	Cross2Icon,
 } from "@radix-ui/react-icons";
-import { Box, Button, Dialog, Flex, IconButton } from "@radix-ui/themes";
+import { Box, Button, Dialog, Flex, IconButton, Text } from "@radix-ui/themes";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
 import "./search-hanzi.css";
@@ -97,13 +99,17 @@ export default function SearchHanzi({
 					</Box>
 				</Box>
 
-				<Flex gap="2" wrap="wrap" mt="2">
+				<Flex gap="2" wrap="wrap" mt="2" align="center">
+					<Flex gap="1" align="center" mx="2">
+						<ArrowRightIcon />
+						<Text size="1">快速选择</Text>
+					</Flex>
 					{chars.map((char, index) => (
 						<Button
 							key={index}
-							variant="outline"
+							variant="ghost"
 							highContrast={selectedIndex === index}
-							size="1"
+							size="3"
 							radius="full"
 							onClick={() => emblaApi?.scrollTo(index)}
 						>

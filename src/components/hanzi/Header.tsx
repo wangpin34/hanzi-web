@@ -1,7 +1,7 @@
 import { useAuth } from "@/utils/auth-context";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { Link } from "@tanstack/react-router";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "../ThemeToggle";
 
 export default function Header() {
 	const { user, loading } = useAuth();

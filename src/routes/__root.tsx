@@ -3,7 +3,7 @@ import "@radix-ui/themes/styles.css";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import Header from "../components/Header";
+import Header from "../components/hanzi/Header";
 import appCss from "../styles.css?url";
 import { AuthProvider } from "../utils/auth-context";
 
