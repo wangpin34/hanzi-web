@@ -30,7 +30,7 @@ export default function Pinyin({ hanzi }: { hanzi: string }) {
 	}, [hanzi]);
 
 	return (
-		<Text size="8" align="center">
+		<Text size="6" align="center">
 			{pinyinResult}
 		</Text>
 	);
