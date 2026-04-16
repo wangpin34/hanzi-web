@@ -14,8 +14,8 @@ export default function Char({
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			width="100"
-			height="100"
+			width="80"
+			height="80"
 			viewBox="0 0 100 100"
 		>
 			<g stroke="red" strokeDasharray="1,1" strokeWidth="1">
@@ -40,11 +40,9 @@ export default function Char({
 				)}
 			</g>
 			<g transform={transform}>
-				{strokes.map((stroke, index) =>
-					index <= (highlightStrokeNumber ?? -1) ? (
-						<path key={index} d={stroke} fill={highlightColor} />
-					) : null,
-				)}
+				{strokes.slice(0, highlightStrokeNumber + 1).map((stroke, index) => (
+					<path key={index} d={stroke} fill={highlightColor} />
+				))}
 			</g>
 		</svg>
 	);
