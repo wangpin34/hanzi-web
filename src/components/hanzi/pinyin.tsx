@@ -29,5 +29,9 @@ export default function Pinyin({ hanzi }: { hanzi: string }) {
 		return pinyin(hanzi);
 	}, [hanzi]);
 
-	return <Text size="8">{pinyinResult}</Text>;
+	return (
+		<Text size="8" align="center">
+			{pinyinResult}
+		</Text>
+	);
 }

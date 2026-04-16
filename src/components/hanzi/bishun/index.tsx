@@ -1,10 +1,10 @@
-import { Pencil1Icon } from "@radix-ui/react-icons";
-import { Box, Flex, IconButton, Popover, Text } from "@radix-ui/themes";
-import HanziWriter from "hanzi-writer";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Cross1Icon, Pencil1Icon } from "@radix-ui/react-icons";
+import { Box, Dialog, Flex, IconButton, Text } from "@radix-ui/themes";
+import type { CharData } from "../types";
 import Char from "./char";
+import Playable from "./playable-char";
 
-function numberToChinese(num) {
+function numberToChinese(num: number) {
 	if (num < 0 || num > 100 || !Number.isInteger(num)) {
 		throw new Error("only support integers between 0 and 100");
 	}
@@ -29,39 +29,37 @@ function numberToChinese(num) {
 	return ones === 0 ? digits[tens] + "十" : digits[tens] + "十" + digits[ones];
 }
 
-interface CharData {
-	strokes: string[];
-	medians: Array<Array<Array<number>>>;
-	radStrokes: Array<number>;
-}
-
-export default function Bishun({ hanzi }: { hanzi: string }) {
-	const hanziRef = useRef<string>(hanzi);
-	const [charData, setCharData] = useState<CharData>();
+export default function Bishun({
+	hanzi,
+	charData,
+}: {
+	hanzi: string;
+	charData: CharData;
+}) {
 	const strokes = charData?.strokes ?? [];
 	const stepStrokesNumbers = Array.from(
 		{ length: strokes.length },
 		(_, i) => i,
 	);
-	const { transform } = useMemo(
-		() => HanziWriter.getScalingTransform(100, 100),
-		[],
-	);
-
-	useEffect(() => {
-		HanziWriter.loadCharacterData(hanziRef.current).then((data) => {
-			setCharData(data as CharData);
-		});
-	}, []);
 
 	return (
-		<Popover.Root>
-			<Popover.Trigger>
+		<Dialog.Root>
+			<Dialog.Trigger>
 				<IconButton variant="ghost" size="1" radius="full">
 					<Pencil1Icon className="w-8 h-8" />
 				</IconButton>
-			</Popover.Trigger>
-			<Popover.Content className="w-auto">
+			</Dialog.Trigger>
+			<Dialog.Content className="w-auto">
+				<div className="absolute w-full top-4 right-4 flex justify-end">
+					<Dialog.Close>
+						<IconButton variant="ghost" color="gray" radius="full" size="4">
+							<Cross1Icon />
+						</IconButton>
+					</Dialog.Close>
+				</div>
+				<Flex justify="center">
+					<Playable hanzi={hanzi} />
+				</Flex>
 				<Flex justify="center">
 					<Text size="3" weight="bold">
 						共 {numberToChinese(strokes.length)} 笔
@@ -75,19 +73,26 @@ export default function Bishun({ hanzi }: { hanzi: string }) {
 				>
 					<div className="grid grid-cols-[repeat(auto-fill,100px)] justify-center gap-4 px-2 py-4">
 						{stepStrokesNumbers.map((strokeNumber) => (
-							<Box>
+							<Flex
+								direction="column"
+								align="center"
+								key={strokeNumber}
+								gap="1"
+							>
 								<Char
 									key={strokeNumber}
 									strokes={strokes}
 									highlightStrokeNumber={strokeNumber}
-									transform={transform}
+									outline
+									riceGrid
+									size={60}
 								/>
-								<Text> 第 {numberToChinese(strokeNumber + 1)} 笔</Text>
-							</Box>
+								<Text size="1"> 第 {numberToChinese(strokeNumber + 1)} 笔</Text>
+							</Flex>
 						))}
 					</div>
 				</Box>
-			</Popover.Content>
-		</Popover.Root>
+			</Dialog.Content>
+		</Dialog.Root>
 	);
 }

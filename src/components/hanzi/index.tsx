@@ -1,10 +1,15 @@
-import { Flex, Grid } from "@radix-ui/themes";
+import { Flex, Grid, Separator } from "@radix-ui/themes";
 import Bishun from "./bishun";
-import Char from "./char";
+import Char from "./bishun/char";
 import Pinyin from "./pinyin";
 import Play from "./play";
+import useCharData from "./useCharData";
 
 export default function Hanzi({ hanzi }: { hanzi: string }) {
+	const charData = useCharData(hanzi);
+
+	if (!charData) return null;
+
 	return (
 		<Flex
 			px="2"
@@ -16,13 +21,23 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 			data-value={hanzi}
 		>
 			<Flex gap="2" direction="column" align="center" className="w-content">
-				<Grid columns="2" gap="1" align="center" className="w-content">
-					<Char hanzi={hanzi} />
+				<Flex gap="1" align="center" justify="center" className="w-content">
+					<Char strokes={charData.strokes} outline size={60} />
+					<Separator orientation="vertical" size="4" />
 					<Pinyin hanzi={hanzi} />
-				</Grid>
+					<Separator orientation="vertical" size="4" />
+					<Char
+						strokes={charData.strokes.slice(
+							charData.radStrokes[0],
+							charData.radStrokes[charData.radStrokes.length - 1],
+						)}
+						size={60}
+					/>
+				</Flex>
+				<Separator my="3" size="4" />
 				<Grid columns="2" gap="8" align="center">
 					<Play hanzi={hanzi} />
-					<Bishun hanzi={hanzi} />
+					<Bishun hanzi={hanzi} charData={charData} />
 				</Grid>
 			</Flex>
 		</Flex>

@@ -52,8 +52,8 @@ function saveRecentSearches(values: Array<string>) {
 
 function SearchRoute() {
 	const navigate = useNavigate();
-	const [input, setInput] = useState("中");
-	const [openSearch, setOpenSearch] = useState(true);
+	const [input, setInput] = useState("");
+	const [openSearch, setOpenSearch] = useState(false);
 	const [recentSearches, setRecentSearches] = useState<Array<string>>([]);
 	const [isRecentListVisible, setIsRecentListVisible] = useState(false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
