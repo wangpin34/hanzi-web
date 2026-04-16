@@ -67,8 +67,13 @@ export default function Bishun({ hanzi }: { hanzi: string }) {
 						共 {numberToChinese(strokes.length)} 笔
 					</Text>
 				</Flex>
-				<Box overflow="auto" maxHeight="40vh" className="m-auto">
-					<Flex justify="center" gap="4" py="4" px="2" wrap="wrap">
+				<Box
+					overflow="auto"
+					maxHeight="40vh"
+					minWidth="60vw"
+					className="m-auto"
+				>
+					<div className="grid grid-cols-[repeat(auto-fill,100px)] justify-center gap-4 px-2 py-4">
 						{stepStrokesNumbers.map((strokeNumber) => (
 							<Box>
 								<Char
@@ -80,7 +85,7 @@ export default function Bishun({ hanzi }: { hanzi: string }) {
 								<Text> 第 {numberToChinese(strokeNumber + 1)} 笔</Text>
 							</Box>
 						))}
-					</Flex>
+					</div>
 				</Box>
 			</Popover.Content>
 		</Popover.Root>
