@@ -1,8 +1,33 @@
 import { Pencil1Icon } from "@radix-ui/react-icons";
-import { Flex, IconButton, Popover } from "@radix-ui/themes";
+import { Box, Flex, IconButton, Popover, Text } from "@radix-ui/themes";
 import HanziWriter from "hanzi-writer";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Char from "./char";
+
+function numberToChinese(num) {
+	if (num < 0 || num > 100 || !Number.isInteger(num)) {
+		throw new Error("only support integers between 0 and 100");
+	}
+
+	const digits = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+
+	if (num === 0) return "零";
+	if (num === 100) return "一百";
+
+	const tens = Math.floor(num / 10);
+	const ones = num % 10;
+
+	// 1–9
+	if (num < 10) return digits[num];
+
+	// 10–19
+	if (tens === 1) {
+		return ones === 0 ? "十" : "十" + digits[ones];
+	}
+
+	// 20–99
+	return ones === 0 ? digits[tens] + "十" : digits[tens] + "十" + digits[ones];
+}
 
 interface CharData {
 	strokes: string[];
@@ -37,16 +62,26 @@ export default function Bishun({ hanzi }: { hanzi: string }) {
 				</IconButton>
 			</Popover.Trigger>
 			<Popover.Content className="w-auto">
-				<Flex p="1" gap="2">
-					{stepStrokesNumbers.map((strokeNumber) => (
-						<Char
-							key={strokeNumber}
-							strokes={strokes}
-							highlightStrokeNumber={strokeNumber}
-							transform={transform}
-						/>
-					))}
+				<Flex justify="center">
+					<Text size="3" weight="bold">
+						共 {numberToChinese(strokes.length)} 笔
+					</Text>
 				</Flex>
+				<Box overflow="auto" maxHeight="40vh" className="m-auto">
+					<Flex justify="center" gap="4" py="4" px="2" wrap="wrap">
+						{stepStrokesNumbers.map((strokeNumber) => (
+							<Box>
+								<Char
+									key={strokeNumber}
+									strokes={strokes}
+									highlightStrokeNumber={strokeNumber}
+									transform={transform}
+								/>
+								<Text> 第 {numberToChinese(strokeNumber + 1)} 笔</Text>
+							</Box>
+						))}
+					</Flex>
+				</Box>
 			</Popover.Content>
 		</Popover.Root>
 	);
