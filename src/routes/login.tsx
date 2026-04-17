@@ -115,7 +115,7 @@ function Login() {
 						<span className="text-xs text-[var(--sea-ink-soft)]">或</span>
 						<div className="h-px flex-1 bg-[var(--line)]" />
 					</div>
-					<div className="mt-4 flex flex-col gap-3 hidden">
+					<div className="mt-4 flex flex-col gap-3">
 						<button
 							type="button"
 							onClick={() => handleOAuthLogin("apple")}
