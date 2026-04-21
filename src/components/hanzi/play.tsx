@@ -9,7 +9,8 @@ export default function Play({ hanzi }: { hanzi: string }) {
 			radius="full"
 			onClick={() => {
 				const utterance = new SpeechSynthesisUtterance(hanzi);
-				utterance.lang = "zh-CN";
+				utterance.lang = "zh";
+				utterance.rate = 0.2;
 				speechSynthesis.speak(utterance);
 			}}
 		>
