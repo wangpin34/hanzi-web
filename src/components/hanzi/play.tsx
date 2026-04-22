@@ -5,6 +5,7 @@ import type { PinyinSyllable } from "./usePinyin";
 import usePinyin from "./usePinyin";
 
 const ctx = new AudioContext();
+
 const audioCache = new Map<string, AudioBuffer>();
 async function loadAudio(url: string) {
 	if (audioCache.has(url)) return audioCache.get(url);
@@ -19,6 +20,10 @@ async function loadAudio(url: string) {
 
 function playBuffer(buffer: AudioBuffer, startTime: number) {
 	const source = ctx.createBufferSource();
+	const gain = ctx.createGain();
+	gain.gain.value = 1;
+	source.connect(gain);
+	gain.connect(ctx.destination);
 	source.buffer = buffer;
 	source.connect(ctx.destination);
 	source.start(startTime);
