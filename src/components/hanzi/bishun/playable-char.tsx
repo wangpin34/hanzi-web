@@ -1,6 +1,6 @@
 import { PlayIcon } from "@radix-ui/react-icons";
 import { IconButton } from "@radix-ui/themes";
-import classnames from 'classnames';
+import classnames from "classnames";
 import HanziWriter from "hanzi-writer";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -24,21 +24,23 @@ export default function Char({ hanzi }: { hanzi: string }) {
 
 	const onPlay = useCallback(() => {
 		setPlaying(true);
-		writer.current?.animateCharacter({onComplete: () => {
-			setPlaying(false);
-		}});
+		writer.current?.animateCharacter({
+			onComplete: () => {
+				setPlaying(false);
+			},
+		});
 	}, []);
 
 	return (
 		<div className="group relative">
 			<div ref={containerRef}></div>
-			<div className={classnames("rounded-full opacity-80 absolute top-0 left-0 bg-gray w-full h-full flex items-center justify-center", {"invisible": playing})}>
-				<IconButton
-					onClick={onPlay}
-					variant="ghost"
-					radius="full"
-					size="2"
-				>
+			<div
+				className={classnames(
+					"rounded-full opacity-80 absolute top-0 left-0 bg-gray w-full h-full flex items-center justify-center",
+					{ invisible: playing },
+				)}
+			>
+				<IconButton onClick={onPlay} variant="ghost" radius="full" size="2">
 					<PlayIcon className="w-8 h-8" />
 				</IconButton>
 			</div>
