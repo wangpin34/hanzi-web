@@ -31,36 +31,55 @@ function playBuffer(buffer: AudioBuffer, startTime: number) {
 	return buffer.duration;
 }
 
-async function playPinyinSequence(pinyinList: PinyinSyllable[]) {
+async function playPinyinSequence(pinyinList: PinyinSyllable[], hanzi: string) {
 	let currentTime = ctx.currentTime;
+	const bufferList: AudioBuffer[] = [];
 
-	for (const syllable of pinyinList) {
-		const { initial, final, tone, raw } = syllable;
-
-		const base = initial + final; // ni
-		//const toneFile = `tone${tone}.mp3`;
-
-		// 目前没有独立的声母，韵母资源，先整体播放
-		// const syllableBuffer = await loadAudio(`/Pinyin-Female-Wav/${base}.mp3`);
-		// const toneBuffer = await loadAudio(`/Pinyin-Female-Wav/${toneFile}`);
-		// 播放音节
-		// const d1 = playBuffer(syllableBuffer!, currentTime);
-		// currentTime += d1 * 0.95; // 稍微 overlap 更自然
-
-		// // 播放声调
-		// const d2 = playBuffer(toneBuffer!, currentTime);
-		//currentTime += d2 * 0.9;
-
-		const audioBuffer = await loadAudio(`/Pinyin-Female-Wav/${raw}.wav`);
-		currentTime += playBuffer(audioBuffer!, currentTime) * 0.9; // 稍微 overlap 更自然;
+	try {
+		await Promise.all(
+			pinyinList.map(async (syllable) => {
+				const { raw } = syllable;
+				const buffer = await loadAudio(`/Pinyin-Female-Wav/${raw}.wav`);
+				buffer && bufferList.push(buffer);
+			}),
+		);
+		for (const buffer of bufferList) {
+			playBuffer(buffer, currentTime);
+			currentTime += buffer.duration * 0.95; // 稍微 overlap 更自然
+		}
+	} catch (e) {
+		const utterance = new SpeechSynthesisUtterance(hanzi);
+		utterance.lang = "zh";
+		utterance.rate = 0.2;
+		speechSynthesis.speak(utterance);
 	}
+
+	// for (const syllable of pinyinList) {
+	// 	const { initial, final, tone, raw } = syllable;
+
+	// 	const base = initial + final; // ni
+	// 	//const toneFile = `tone${tone}.mp3`;
+
+	// 	// 目前没有独立的声母，韵母资源，先整体播放
+	// 	// const syllableBuffer = await loadAudio(`/Pinyin-Female-Wav/${base}.mp3`);
+	// 	// const toneBuffer = await loadAudio(`/Pinyin-Female-Wav/${toneFile}`);
+	// 	// 播放音节
+	// 	// const d1 = playBuffer(syllableBuffer!, currentTime);
+	// 	// currentTime += d1 * 0.95; // 稍微 overlap 更自然
+
+	// 	// // 播放声调
+	// 	// const d2 = playBuffer(toneBuffer!, currentTime);
+	// 	//currentTime += d2 * 0.9;
+	// 	const audioBuffer = await loadAudio(`/Pinyin-Female-Wav/${raw}.wav`);
+	// 	bufferList.push(audioBuffer!);
+	// }
 }
 
 export default function Play({ hanzi }: { hanzi: string }) {
 	const pinyinResult = usePinyin(hanzi);
 	const handlePlay = useCallback(async () => {
-		await playPinyinSequence(pinyinResult);
-	}, [pinyinResult]);
+		await playPinyinSequence(pinyinResult, hanzi);
+	}, [pinyinResult, hanzi]);
 
 	return (
 		<IconButton
