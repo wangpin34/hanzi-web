@@ -35,7 +35,7 @@ async function playPinyinSequence(pinyinList: PinyinSyllable[]) {
 	let currentTime = ctx.currentTime;
 
 	for (const syllable of pinyinList) {
-		const { initial, final, tone } = syllable;
+		const { initial, final, tone, raw } = syllable;
 
 		const base = initial + final; // ni
 		//const toneFile = `tone${tone}.mp3`;
@@ -51,9 +51,7 @@ async function playPinyinSequence(pinyinList: PinyinSyllable[]) {
 		// const d2 = playBuffer(toneBuffer!, currentTime);
 		//currentTime += d2 * 0.9;
 
-		const audioBuffer = await loadAudio(
-			`/Pinyin-Female-Wav/${base}${tone === 5 ? "" : tone}.wav`,
-		);
+		const audioBuffer = await loadAudio(`/Pinyin-Female-Wav/${raw}.wav`);
 		currentTime += playBuffer(audioBuffer!, currentTime) * 0.9; // 稍微 overlap 更自然;
 	}
 }
