@@ -30,11 +30,13 @@
     "cnchar-voice": "^3.2.6",
     "embla-carousel-react": "^8.6.0",
     "hanzi-writer": "^3.7.3",
+    "ky": "^2.0.2",
     "lucide-react": "^0.545.0",
     "pinyin-pro": "^3.28.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "supabase-agent-skills": "github:supabase/agent-skills",
+    "swr": "^2.4.1",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {

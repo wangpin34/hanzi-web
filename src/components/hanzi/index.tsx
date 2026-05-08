@@ -1,4 +1,6 @@
+import { client } from "@/utils/api";
 import { Flex, Grid, Separator, Text } from "@radix-ui/themes";
+import useSWR from "swr";
 import Bishun from "./bishun";
 import Char from "./bishun/char";
 import Pinyin from "./pinyin";
@@ -7,7 +9,11 @@ import useCharData from "./useCharData";
 
 export default function Hanzi({ hanzi }: { hanzi: string }) {
 	const charData = useCharData(hanzi);
-
+	const {
+		data: explaination,
+		error,
+		isLoading,
+	} = useSWR(hanzi ? `/hanzi/explain?hanzi=${hanzi}` : null, client.get);
 	if (!charData) return null;
 
 	return (
