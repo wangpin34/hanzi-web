@@ -30,49 +30,49 @@
 }
 
 :root[data-theme="dark"] {
-  --primary: #F0A0B8;
-  --primary-focus: #F0A0B8;
+  --primary: #C4587A;
+  --primary-focus: #D4698A;
   --primary-on-dark: #F0A0B8;
   --ink: #f5f5f7;
   --ink-muted: #cccccc;
   --ink-muted-soft: #999999;
   --canvas: #000000;
-  --canvas-parchment: #1d1d1f;
-  --surface-pearl: #272729;
-  --surface: rgba(39, 39, 41, 0.8);
-  --surface-strong: rgba(42, 42, 44, 0.92);
-  --hairline: rgba(255, 255, 255, 0.18);
+  --canvas-parchment: #1c1c1e;
+  --surface-pearl: #2c2c2e;
+  --surface: rgba(44, 44, 46, 0.8);
+  --surface-strong: rgba(58, 58, 60, 0.92);
+  --hairline: rgba(255, 255, 255, 0.15);
   --divider-soft: rgba(255, 255, 255, 0.08);
-  --inset-glint: rgba(255, 255, 255, 0.1);
+  --inset-glint: rgba(255, 255, 255, 0.08);
   --bg-base: #000000;
   --header-bg: rgba(0, 0, 0, 0.84);
-  --chip-bg: rgba(30, 30, 30, 0.9);
-  --chip-line: rgba(255, 255, 255, 0.2);
-  --link-bg-hover: rgba(42, 42, 44, 0.8);
+  --chip-bg: rgba(44, 44, 46, 0.9);
+  --chip-line: rgba(255, 255, 255, 0.16);
+  --link-bg-hover: rgba(58, 58, 60, 0.8);
   --on-primary: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --primary: #F0A0B8;
-    --primary-focus: #F0A0B8;
+    --primary: #C4587A;
+    --primary-focus: #D4698A;
     --primary-on-dark: #F0A0B8;
     --ink: #f5f5f7;
     --ink-muted: #cccccc;
     --ink-muted-soft: #999999;
     --canvas: #000000;
-    --canvas-parchment: #1d1d1f;
-    --surface-pearl: #272729;
-    --surface: rgba(39, 39, 41, 0.8);
-    --surface-strong: rgba(42, 42, 44, 0.92);
-    --hairline: rgba(255, 255, 255, 0.18);
+    --canvas-parchment: #1c1c1e;
+    --surface-pearl: #2c2c2e;
+    --surface: rgba(44, 44, 46, 0.8);
+    --surface-strong: rgba(58, 58, 60, 0.92);
+    --hairline: rgba(255, 255, 255, 0.15);
     --divider-soft: rgba(255, 255, 255, 0.08);
-    --inset-glint: rgba(255, 255, 255, 0.1);
+    --inset-glint: rgba(255, 255, 255, 0.08);
     --bg-base: #000000;
     --header-bg: rgba(0, 0, 0, 0.84);
-    --chip-bg: rgba(30, 30, 30, 0.9);
-    --chip-line: rgba(255, 255, 255, 0.2);
-    --link-bg-hover: rgba(42, 42, 44, 0.8);
+    --chip-bg: rgba(44, 44, 46, 0.9);
+    --chip-line: rgba(255, 255, 255, 0.16);
+    --link-bg-hover: rgba(58, 58, 60, 0.8);
     --on-primary: #ffffff;
   }
 }

@@ -46,20 +46,17 @@ export default function SearchHanzi({
 					// 👇 iOS 风格动画
 					animation: "slideUp 250ms ease-out",
 				}}
-				className="max-w-full!  fixed! inset-0! flex flex-col border-radius-0"
+				className="max-w-full! fixed! inset-0! flex flex-col border-radius-0 p-0!"
 			>
-				<Dialog.Title>
-					<Flex
-						align="center"
-						justify="between"
-						px="3"
-						py="2"
-						style={{
-							borderBottom: "1px solid var(--hairline)",
-						}}
-					>
+				<Dialog.Title className="bg-[var(--primary)] text-white mb-0! pt-[env(safe-area-inset-top)]">
+					<Flex align="center" justify="between" px="3" py="3">
 						<Dialog.Close>
-							<Button size="1" variant="ghost" radius="full">
+							<Button
+								size="1"
+								variant="ghost"
+								radius="full"
+								className="text-white! hover:bg-white/20!"
+							>
 								<Cross2Icon />
 							</Button>
 						</Dialog.Close>
@@ -70,6 +67,7 @@ export default function SearchHanzi({
 									size="1"
 									variant="outline"
 									radius="full"
+									className="text-white! border-white/40! hover:bg-white/20!"
 									onClick={() => emblaApi?.scrollPrev()}
 									disabled={prevBtnDisabled}
 								>
@@ -79,6 +77,7 @@ export default function SearchHanzi({
 									size="1"
 									variant="outline"
 									radius="full"
+									className="text-white! border-white/40! hover:bg-white/20!"
 									onClick={() => emblaApi?.scrollNext()}
 									disabled={nextBtnDisabled}
 								>
@@ -89,7 +88,10 @@ export default function SearchHanzi({
 					</Flex>
 				</Dialog.Title>
 				<Dialog.Description></Dialog.Description>
-				<Box ref={emblaRef} className="embla__viewport grow">
+				<Box
+					ref={emblaRef}
+					className="embla__viewport grow overflow-hidden bg-[var(--bg-base)]"
+				>
 					<Box className="embla__container">
 						{chars.map((char, index) => (
 							<div className="embla__slide" key={index}>

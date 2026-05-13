@@ -45,7 +45,12 @@ export default function Bishun({
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger>
-				<IconButton variant="ghost" size="1" radius="full">
+				<IconButton
+					variant="ghost"
+					size="1"
+					radius="full"
+					className="text-white! hover:bg-white/20!"
+				>
 					<Pencil1Icon className="w-8 h-8" />
 				</IconButton>
 			</Dialog.Trigger>

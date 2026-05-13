@@ -86,6 +86,7 @@ export default function Play({ hanzi }: { hanzi: string }) {
 			size="1"
 			variant="ghost"
 			radius="full"
+			className="text-white! hover:bg-white/20!"
 			onClick={() => {
 				// const utterance = new SpeechSynthesisUtterance(hanzi);
 				// utterance.lang = "zh";

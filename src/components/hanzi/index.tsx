@@ -33,8 +33,6 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 
 	return (
 		<Flex
-			px="2"
-			py="1"
 			className="w-full"
 			justify="center"
 			align="center"
@@ -42,19 +40,33 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 			data-value={hanzi}
 			direction="column"
 		>
-			<Flex gap="2" direction="column" align="center" className="w-content">
+			<Flex
+				gap="2"
+				direction="column"
+				align="center"
+				className="w-full bg-[var(--primary)] px-6 py-4 text-white"
+			>
 				<Flex gap="1" align="center" justify="center" className="w-content">
-					<Char strokes={charData.strokes} outline size={60} />
-					<Separator orientation="vertical" size="4" />
+					<Char
+						strokes={charData.strokes}
+						outline
+						size={60}
+						strokeColor="#fff"
+					/>
+					<Separator orientation="vertical" size="4" className="opacity-30" />
 					<Pinyin hanzi={hanzi} />
-					<Separator orientation="vertical" size="4" />
+					<Separator orientation="vertical" size="4" className="opacity-30" />
 					{charData.radStrokes ? (
 						<Char
 							strokes={charData.radStrokes.map((n) => charData.strokes[n])}
 							size={40}
+							strokeColor="rgba(255,255,255,0.5)"
+							highlightColor="#fff"
 						/>
 					) : (
-						<Text size="1">独体字</Text>
+						<Text size="1" className="text-white/80">
+							独体字
+						</Text>
 					)}
 				</Flex>
 
@@ -63,8 +75,7 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 					<Bishun hanzi={hanzi} charData={charData} />
 				</Grid>
 			</Flex>
-			<Separator my="3" size="4" />
-			<Flex>
+			<Flex px="4" py="3">
 				<Text>{info?.definitions}</Text>
 			</Flex>
 		</Flex>
