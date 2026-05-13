@@ -1,4 +1,5 @@
 import { useAuth } from "@/utils/auth-context";
+import { Button } from "@radix-ui/themes";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 
@@ -66,13 +67,14 @@ function Profile() {
 							</p>
 						</div>
 					</div>
-					<button
-						type="button"
+					<Button
 						onClick={handleSignOut}
-						className="mt-8 w-full rounded-xl border border-[var(--hairline)] bg-[var(--surface)] px-4 py-3 font-semibold text-[var(--ink)] transition hover:bg-[var(--link-bg-hover)]"
+						size="4"
+						variant="outline"
+						className="w-full mt-8"
 					>
 						退出登录
-					</button>
+					</Button>
 				</div>
 			</section>
 		</main>
