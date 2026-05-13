@@ -1,3 +1,5 @@
+import { DesktopIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { DropdownMenu, IconButton } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 
 type ThemeMode = "light" | "dark" | "auto";
@@ -54,28 +56,43 @@ export default function ThemeToggle() {
 		};
 	}, [mode]);
 
-	function toggleMode() {
-		const nextMode: ThemeMode =
-			mode === "light" ? "dark" : mode === "dark" ? "auto" : "light";
-		setMode(nextMode);
-		applyThemeMode(nextMode);
-		window.localStorage.setItem("theme", nextMode);
+	function selectMode(next: ThemeMode) {
+		setMode(next);
+		applyThemeMode(next);
+		window.localStorage.setItem("theme", next);
 	}
 
-	const label =
-		mode === "auto"
-			? "Theme mode: auto (system). Click to switch to light mode."
-			: `Theme mode: ${mode}. Click to switch mode.`;
-
 	return (
-		<button
-			type="button"
-			onClick={toggleMode}
-			aria-label={label}
-			title={label}
-			className="rounded-full border border-[var(--hairline)] bg-[var(--surface-strong)] px-3 py-1.5 text-sm font-semibold text-[var(--ink)] transition hover:bg-[var(--link-bg-hover)]"
-		>
-			{mode === "auto" ? "Auto" : mode === "dark" ? "Dark" : "Light"}
-		</button>
+		<DropdownMenu.Root>
+			<DropdownMenu.Trigger>
+				<IconButton
+					variant="ghost"
+					size="2"
+					radius="full"
+					aria-label="Theme"
+					className="text-[var(--ink-muted-soft)]! hover:text-[var(--ink)]!"
+				>
+					{mode === "dark" ? (
+						<MoonIcon width={18} height={18} />
+					) : mode === "light" ? (
+						<SunIcon width={18} height={18} />
+					) : (
+						<DesktopIcon width={18} height={18} />
+					)}
+				</IconButton>
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content size="1" align="end">
+				<DropdownMenu.Item onSelect={() => selectMode("light")}>
+					<SunIcon /> Light
+				</DropdownMenu.Item>
+				<DropdownMenu.Item onSelect={() => selectMode("dark")}>
+					<MoonIcon /> Dark
+				</DropdownMenu.Item>
+				<DropdownMenu.Separator />
+				<DropdownMenu.Item onSelect={() => selectMode("auto")}>
+					<DesktopIcon /> System
+				</DropdownMenu.Item>
+			</DropdownMenu.Content>
+		</DropdownMenu.Root>
 	);
 }
