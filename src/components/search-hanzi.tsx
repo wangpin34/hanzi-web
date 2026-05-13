@@ -55,7 +55,7 @@ export default function SearchHanzi({
 						px="3"
 						py="2"
 						style={{
-							borderBottom: "1px solid #eee",
+							borderBottom: "1px solid var(--hairline)",
 						}}
 					>
 						<Dialog.Close>

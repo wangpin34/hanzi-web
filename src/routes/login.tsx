@@ -54,10 +54,10 @@ function Login() {
 			<main className="page-wrap min-h-[calc(100vh-7rem)] px-4 pb-8 max-sm:min-h-[calc(100vh-5.5rem)]">
 				<section className="grid min-h-[calc(100vh-10rem)] place-items-center max-sm:min-h-[calc(100vh-8rem)]">
 					<div className="island-shell w-full max-w-md rounded-2xl p-8">
-						<h1 className="display-title mb-4 text-2xl font-bold text-[var(--sea-ink)]">
+						<h1 className="display-title mb-4 text-2xl font-bold text-[var(--ink)]">
 							查看邮箱
 						</h1>
-						<p className="text-[var(--sea-ink-soft)]">
+						<p className="text-[var(--ink-muted-soft)]">
 							登录链接已发送至 <strong>{email}</strong>
 							，请点击邮件中的链接完成登录。
 						</p>
@@ -67,7 +67,7 @@ function Login() {
 								setSent(false);
 								setEmail("");
 							}}
-							className="mt-6 text-sm text-[var(--lagoon-deep)] hover:underline"
+							className="mt-6 text-sm text-[var(--primary)] hover:underline"
 						>
 							使用其他邮箱
 						</button>
@@ -81,15 +81,15 @@ function Login() {
 		<main className="page-wrap min-h-[calc(100vh-7rem)] px-4 pb-8 max-sm:min-h-[calc(100vh-5.5rem)]">
 			<section className="grid min-h-[calc(100vh-10rem)] place-items-center max-sm:min-h-[calc(100vh-8rem)]">
 				<div className="island-shell w-full max-w-md rounded-2xl p-8">
-					<h1 className="display-title mb-2 text-2xl font-bold text-[var(--sea-ink)]">
+					<h1 className="display-title mb-2 text-2xl font-bold text-[var(--ink)]">
 						登录
 					</h1>
-					<p className="mb-6 text-sm text-[var(--sea-ink-soft)]">
+					<p className="mb-6 text-sm text-[var(--ink-muted-soft)]">
 						输入邮箱地址，我们将发送一个登录链接到你的邮箱。
 					</p>
 					<form onSubmit={handleLogin} className="flex flex-col gap-4">
 						<label className="flex flex-col gap-1.5">
-							<span className="text-sm font-medium text-[var(--sea-ink)]">
+							<span className="text-sm font-medium text-[var(--ink)]">
 								邮箱地址
 							</span>
 							<input
@@ -98,28 +98,28 @@ function Login() {
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								placeholder="you@example.com"
-								className="rounded-xl border border-[var(--line)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--sea-ink)] outline-none transition placeholder:text-[var(--sea-ink-soft)] focus:border-[var(--lagoon-deep)]"
+								className="rounded-xl border border-[var(--hairline)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--ink)] outline-none transition placeholder:text-[var(--ink-muted-soft)] focus:border-[var(--primary-focus)]"
 							/>
 						</label>
 						{error && <p className="text-sm text-red-600">{error}</p>}
 						<button
 							type="submit"
 							disabled={loading}
-							className="rounded-xl bg-[var(--lagoon-deep)] px-4 py-3 font-semibold text-white transition hover:opacity-90 disabled:opacity-50"
+							className="rounded-xl bg-[var(--primary)] px-4 py-3 font-semibold text-white transition hover:opacity-90 disabled:opacity-50"
 						>
 							{loading ? "发送中…" : "发送登录链接"}
 						</button>
 					</form>
 					<div className="mt-6 flex items-center gap-3">
-						<div className="h-px flex-1 bg-[var(--line)]" />
-						<span className="text-xs text-[var(--sea-ink-soft)]">或</span>
-						<div className="h-px flex-1 bg-[var(--line)]" />
+						<div className="h-px flex-1 bg-[var(--hairline)]" />
+						<span className="text-xs text-[var(--ink-muted-soft)]">或</span>
+						<div className="h-px flex-1 bg-[var(--hairline)]" />
 					</div>
 					<div className="mt-4 flex flex-col gap-3">
 						<button
 							type="button"
 							onClick={() => handleOAuthLogin("apple")}
-							className="flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--line)] bg-[var(--surface)] px-4 py-3 font-semibold text-[var(--sea-ink)] transition hover:bg-[var(--link-bg-hover)]"
+							className="flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--surface)] px-4 py-3 font-semibold text-[var(--ink)] transition hover:bg-[var(--link-bg-hover)]"
 						>
 							<svg
 								viewBox="0 0 24 24"
@@ -135,7 +135,7 @@ function Login() {
 						<button
 							type="button"
 							onClick={() => handleOAuthLogin("google")}
-							className="flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--line)] bg-[var(--surface)] px-4 py-3 font-semibold text-[var(--sea-ink)] transition hover:bg-[var(--link-bg-hover)]"
+							className="flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--surface)] px-4 py-3 font-semibold text-[var(--ink)] transition hover:bg-[var(--link-bg-hover)]"
 						>
 							<svg
 								viewBox="0 0 24 24"

@@ -51,13 +51,13 @@ function AuthCallback() {
 			<main className="page-wrap min-h-[calc(100vh-7rem)] px-4 pb-8 max-sm:min-h-[calc(100vh-5.5rem)]">
 				<section className="grid min-h-[calc(100vh-10rem)] place-items-center max-sm:min-h-[calc(100vh-8rem)]">
 					<div className="island-shell w-full max-w-md rounded-2xl p-8 text-center">
-						<h1 className="display-title mb-4 text-2xl font-bold text-[var(--sea-ink)]">
+						<h1 className="display-title mb-4 text-2xl font-bold text-[var(--ink)]">
 							登录失败
 						</h1>
-						<p className="mb-6 text-[var(--sea-ink-soft)]">{error}</p>
+						<p className="mb-6 text-[var(--ink-muted-soft)]">{error}</p>
 						<a
 							href="/login"
-							className="text-sm text-[var(--lagoon-deep)] hover:underline"
+							className="text-sm text-[var(--primary)] hover:underline"
 						>
 							返回登录
 						</a>
@@ -71,10 +71,10 @@ function AuthCallback() {
 		<main className="page-wrap min-h-[calc(100vh-7rem)] px-4 pb-8 max-sm:min-h-[calc(100vh-5.5rem)]">
 			<section className="grid min-h-[calc(100vh-10rem)] place-items-center max-sm:min-h-[calc(100vh-8rem)]">
 				<div className="island-shell w-full max-w-md rounded-2xl p-8 text-center">
-					<h1 className="display-title mb-4 text-2xl font-bold text-[var(--sea-ink)]">
+					<h1 className="display-title mb-4 text-2xl font-bold text-[var(--ink)]">
 						正在登录…
 					</h1>
-					<p className="text-[var(--sea-ink-soft)]">请稍候</p>
+					<p className="text-[var(--ink-muted-soft)]">请稍候</p>
 				</div>
 			</section>
 		</main>

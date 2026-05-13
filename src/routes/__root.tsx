@@ -40,8 +40,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
 				<HeadContent />
 			</head>
-			<body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
-				<Theme>
+			<body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(221,118,148,0.24)]">
+				<Theme accentColor="pink">
 					<AuthProvider>
 						<Header />
 						{children}

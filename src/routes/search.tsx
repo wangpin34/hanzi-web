@@ -139,7 +139,7 @@ function SearchRoute() {
 
 	const showRecentSearches = isRecentListVisible && recentSearches.length > 0;
 	const shellButtonClassName =
-		"inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--line)] bg-[linear-gradient(165deg,var(--surface-strong),var(--surface))] text-[var(--sea-ink)] shadow-[inset_0_1px_0_var(--inset-glint),0_16px_32px_rgba(30,90,72,0.1),0_4px_12px_rgba(23,58,64,0.06)] transition-[background-color,color,border-color,transform] duration-180 ease-out hover:-translate-y-px hover:border-[color-mix(in_oklab,var(--lagoon-deep)_36%,var(--line))] focus-visible:-translate-y-px focus-visible:border-[color-mix(in_oklab,var(--lagoon-deep)_36%,var(--line))] focus-visible:outline-none max-sm:h-10 max-sm:w-10";
+		"inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--hairline)] bg-[var(--surface-strong)] text-[var(--ink)] shadow-[0_16px_32px_rgba(0,0,0,0.06),0_4px_12px_rgba(0,0,0,0.04)] transition-[background-color,color,border-color,transform] duration-180 ease-out hover:-translate-y-px hover:border-[color-mix(in_oklab,var(--primary-focus)_36%,var(--hairline))] focus-visible:-translate-y-px focus-visible:border-[color-mix(in_oklab,var(--primary-focus)_36%,var(--hairline))] focus-visible:outline-none max-sm:h-10 max-sm:w-10";
 
 	return (
 		<main className="page-wrap min-h-[calc(100vh-7rem)] px-4 pb-8 pt-14 max-sm:min-h-[calc(100vh-5.5rem)]">
@@ -185,11 +185,11 @@ function SearchRoute() {
 
 						{showRecentSearches ? (
 							<div
-								className="absolute inset-x-0 top-[calc(100%+0.6rem)] z-20 rounded-[1.1rem] border border-[var(--line)] bg-[linear-gradient(165deg,var(--surface-strong),var(--surface))] p-[0.7rem] shadow-[inset_0_1px_0_var(--inset-glint),0_26px_48px_rgba(23,58,64,0.14),0_8px_22px_rgba(23,58,64,0.08)] backdrop-blur-[10px] max-sm:top-[calc(100%+0.5rem)] max-sm:p-[0.55rem]"
+								className="absolute inset-x-0 top-[calc(100%+0.6rem)] z-20 rounded-[1.1rem] border border-[var(--hairline)] bg-[var(--surface-strong)] p-[0.7rem] shadow-[0_26px_48px_rgba(0,0,0,0.08),0_8px_22px_rgba(0,0,0,0.04)] backdrop-blur-[10px] max-sm:top-[calc(100%+0.5rem)] max-sm:p-[0.55rem]"
 								role="listbox"
 								aria-label="Recent searches"
 							>
-								<div className="px-[0.45rem] pb-[0.55rem] pt-[0.2rem] text-[0.74rem] font-bold uppercase tracking-[0.14em] text-[var(--sea-ink-soft)]">
+								<div className="px-[0.45rem] pb-[0.55rem] pt-[0.2rem] text-[0.74rem] font-bold uppercase tracking-[0.14em] text-[var(--ink-muted-soft)]">
 									Recent
 								</div>
 								<div className="flex flex-col gap-[0.3rem]">
@@ -197,7 +197,7 @@ function SearchRoute() {
 										<button
 											key={value}
 											type="button"
-											className="inline-flex w-full items-center gap-3 rounded-[0.8rem] bg-transparent px-[0.8rem] py-3 text-left text-[var(--sea-ink)] transition-[background-color,color,border-color,transform] duration-180 ease-out hover:bg-[color-mix(in_oklab,var(--link-bg-hover)_88%,transparent_12%)] focus-visible:bg-[color-mix(in_oklab,var(--link-bg-hover)_88%,transparent_12%)] focus-visible:outline-none max-sm:gap-[0.65rem] max-sm:px-3 max-sm:py-[0.7rem]"
+											className="inline-flex w-full items-center gap-3 rounded-[0.8rem] bg-transparent px-[0.8rem] py-3 text-left text-[var(--ink)] transition-[background-color,color,border-color,transform] duration-180 ease-out hover:bg-[color-mix(in_oklab,var(--link-bg-hover)_88%,transparent_12%)] focus-visible:bg-[color-mix(in_oklab,var(--link-bg-hover)_88%,transparent_12%)] focus-visible:outline-none max-sm:gap-[0.65rem] max-sm:px-3 max-sm:py-[0.7rem]"
 											onClick={() => handleRecentSelect(value)}
 										>
 											<MagnifyingGlassIcon height="14" width="14" />
