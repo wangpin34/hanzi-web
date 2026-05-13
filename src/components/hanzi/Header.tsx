@@ -1,5 +1,5 @@
 import { useAuth } from "@/utils/auth-context";
-import { PersonIcon } from "@radix-ui/react-icons";
+import { EnterIcon, PersonIcon } from "@radix-ui/react-icons";
 import { Link } from "@tanstack/react-router";
 import ThemeToggle from "../ThemeToggle";
 
@@ -28,7 +28,11 @@ export default function Header() {
 							className="rounded-full p-2 text-[var(--ink-muted-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--ink)]"
 							aria-label={user ? "个人资料" : "登录"}
 						>
-							<PersonIcon width={20} height={20} />
+							{user ? (
+								<PersonIcon width={20} height={20} />
+							) : (
+								<EnterIcon width={20} height={20} />
+							)}
 						</Link>
 					)}
 				</div>
