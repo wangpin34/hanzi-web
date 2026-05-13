@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/suspicious/noTsIgnore: <explanation> */
+
 import { client } from "@/utils/api";
 import { Flex, Grid, Separator, Text } from "@radix-ui/themes";
 import useSWR from "swr";
@@ -7,14 +9,27 @@ import Pinyin from "./pinyin";
 import Play from "./play";
 import useCharData from "./useCharData";
 
+interface HanziInfo {
+	char: string;
+	definitions: string;
+	definitions_en: string[] | string;
+	pinyin: string[];
+}
+
 export default function Hanzi({ hanzi }: { hanzi: string }) {
 	const charData = useCharData(hanzi);
 	const {
-		data: explaination,
+		data: info,
 		error,
 		isLoading,
-	} = useSWR(hanzi ? `/hanzi/explain?hanzi=${hanzi}` : null, client.get);
+	} = useSWR<HanziInfo>(
+		hanzi ? `/hanzi/explain?hanzi=${hanzi}` : null,
+		//@ts-ignore
+		client.get,
+	);
 	if (!charData) return null;
+
+	console.log(`info`, info);
 
 	return (
 		<Flex
@@ -25,6 +40,7 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 			align="center"
 			data-name="hanzi"
 			data-value={hanzi}
+			direction="column"
 		>
 			<Flex gap="2" direction="column" align="center" className="w-content">
 				<Flex gap="1" align="center" justify="center" className="w-content">
@@ -41,11 +57,15 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 						<Text size="1">独体字</Text>
 					)}
 				</Flex>
-				<Separator my="3" size="4" />
+
 				<Grid columns="2" gap="8" align="center">
 					<Play hanzi={hanzi} />
 					<Bishun hanzi={hanzi} charData={charData} />
 				</Grid>
+			</Flex>
+			<Separator my="3" size="4" />
+			<Flex>
+				<Text>{info?.definitions}</Text>
 			</Flex>
 		</Flex>
 	);
