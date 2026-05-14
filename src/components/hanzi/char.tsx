@@ -1,3 +1,7 @@
+/**
+ * This component is not used any more
+ * @deprecated
+ */
 import HanziWriter from "hanzi-writer";
 import { useEffect, useRef } from "react";
 

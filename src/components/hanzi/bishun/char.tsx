@@ -3,9 +3,10 @@ import { useMemo } from "react";
 
 export default function Char({
 	strokes,
-	strokeColor = "#aaa",
-	highlightStrokeNumber = strokes.length - 1,
-	highlightColor = "#000",
+	strokeColor = "var(--ink-muted-soft)",
+	highlightColor = strokeColor,
+	highlightStart = 0,
+	highlightEnd = 0,
 	riceGrid = false,
 	outline = false,
 	size = 100,
@@ -13,7 +14,8 @@ export default function Char({
 	strokes: string[];
 	strokeColor?: string;
 	highlightColor?: string;
-	highlightStrokeNumber?: number;
+	highlightStart?: number;
+	highlightEnd?: number;
 	riceGrid?: boolean;
 	outline?: boolean;
 	size?: number;
@@ -30,7 +32,7 @@ export default function Char({
 			height={size}
 			viewBox="0 0 100 100"
 		>
-			<g stroke="red" strokeDasharray="1,1" strokeWidth="1">
+			<g stroke={highlightColor} strokeDasharray="1,1" strokeWidth="1">
 				{outline && (
 					<rect
 						x="0"
@@ -50,17 +52,21 @@ export default function Char({
 					</>
 				)}
 			</g>
+			{/* non highlighted strokes */}
 			<g transform={transform}>
 				{strokes.map((stroke, index) =>
-					index > (highlightStrokeNumber ?? -1) ? (
+					index < highlightStart || index > highlightEnd ? (
 						<path key={index} d={stroke} fill={strokeColor} />
 					) : null,
 				)}
 			</g>
+			{/* highlighted strokes */}
 			<g transform={transform}>
-				{strokes.slice(0, highlightStrokeNumber + 1).map((stroke, index) => (
-					<path key={index} d={stroke} fill={highlightColor} />
-				))}
+				{strokes
+					.slice(highlightStart, highlightEnd + 1)
+					.map((stroke, index) => (
+						<path key={index} d={stroke} fill={highlightColor} />
+					))}
 			</g>
 		</svg>
 	);

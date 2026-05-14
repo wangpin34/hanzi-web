@@ -49,7 +49,7 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 						strokes={charData.strokes}
 						outline
 						size={60}
-						strokeColor="#fff"
+						strokeColor="var(--gray-1)"
 					/>
 					<Separator orientation="vertical" size="4" className="opacity-30" />
 					<Pinyin hanzi={hanzi} />
@@ -58,8 +58,7 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 						<Char
 							strokes={charData.radStrokes.map((n) => charData.strokes[n])}
 							size={40}
-							strokeColor="rgba(255,255,255,0.5)"
-							highlightColor="#fff"
+							strokeColor="var(--gray-1)"
 						/>
 					) : (
 						<Text size="1" className="text-white/80">

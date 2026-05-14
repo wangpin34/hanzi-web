@@ -82,7 +82,10 @@ export default function Bishun({
 								<Char
 									key={strokeNumber}
 									strokes={strokes}
-									highlightStrokeNumber={strokeNumber}
+									highlightStart={0}
+									highlightEnd={strokeNumber}
+									strokeColor="var(--ink-muted-soft)"
+									highlightColor="var(--primary)"
 									outline
 									riceGrid
 									size={60}
