@@ -1,5 +1,5 @@
 import { useAuth } from "@/utils/auth-context";
-import { EnterIcon, PersonIcon } from "@radix-ui/react-icons";
+import { EnterIcon, HeartFilledIcon, PersonIcon } from "@radix-ui/react-icons";
 import { Link } from "@tanstack/react-router";
 import ThemeToggle from "../ThemeToggle";
 
@@ -24,14 +24,31 @@ export default function Header() {
 
 					{!loading && (
 						<Link
+							to={user ? "/favorited" : "/login"}
+							className="inline-flex items-center gap-1.5 rounded-full p-2 text-sm text-[var(--ink-muted-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--ink)]"
+							aria-label="收藏"
+						>
+							<HeartFilledIcon width={18} height={18} />
+							<span className="hidden sm:inline">收藏</span>
+						</Link>
+					)}
+
+					{!loading && (
+						<Link
 							to={user ? "/profile" : "/login"}
-							className="rounded-full p-2 text-[var(--ink-muted-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--ink)]"
+							className="inline-flex items-center gap-1.5 rounded-full p-2 text-sm text-[var(--ink-muted-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--ink)]"
 							aria-label={user ? "个人资料" : "登录"}
 						>
 							{user ? (
-								<PersonIcon width={20} height={20} />
+								<>
+									<PersonIcon width={18} height={18} />
+									<span className="hidden sm:inline">我的</span>
+								</>
 							) : (
-								<EnterIcon width={20} height={20} />
+								<>
+									<EnterIcon width={18} height={18} />
+									<span className="hidden sm:inline">登录</span>
+								</>
 							)}
 						</Link>
 					)}

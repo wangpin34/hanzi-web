@@ -1,5 +1,5 @@
 import { DesktopIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { DropdownMenu, IconButton } from "@radix-ui/themes";
+import { DropdownMenu } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 
 type ThemeMode = "light" | "dark" | "auto";
@@ -62,15 +62,15 @@ export default function ThemeToggle() {
 		window.localStorage.setItem("theme", next);
 	}
 
+	const label = mode === "dark" ? "深色" : mode === "light" ? "浅色" : "主题";
+
 	return (
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger>
-				<IconButton
-					variant="ghost"
-					size="2"
-					radius="full"
+				<button
+					type="button"
 					aria-label="Theme"
-					className="text-[var(--ink-muted-soft)]! hover:text-[var(--ink)]!"
+					className="inline-flex items-center gap-1.5 rounded-full p-2 text-sm text-[var(--ink-muted-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--ink)]"
 				>
 					{mode === "dark" ? (
 						<MoonIcon width={18} height={18} />
@@ -79,7 +79,8 @@ export default function ThemeToggle() {
 					) : (
 						<DesktopIcon width={18} height={18} />
 					)}
-				</IconButton>
+					<span className="hidden sm:inline">{label}</span>
+				</button>
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content size="1" align="end">
 				<DropdownMenu.Item onSelect={() => selectMode("light")}>
