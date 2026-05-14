@@ -1,15 +1,25 @@
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: <explanation> */
 
 import Hanzi from "#/components/hanzi";
+import { useAuth } from "@/utils/auth-context";
+import { supabase } from "@/utils/supabase";
 import {
 	ArrowLeftIcon,
 	ArrowRightIcon,
 	Cross2Icon,
+	HeartFilledIcon,
+	HeartIcon,
 } from "@radix-ui/react-icons";
 import { Box, Button, Dialog, Flex, IconButton, Text } from "@radix-ui/themes";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
 import "./search-hanzi.css";
+
+async function favoriteChars(userId: string, chars: string[]) {
+	await supabase
+		.from("user_hanzi_favorited")
+		.insert({ hanzi: chars.join(""), created_by: userId });
+}
 
 export default function SearchHanzi({
 	chars,
@@ -20,11 +30,13 @@ export default function SearchHanzi({
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 }) {
+	const { user } = useAuth();
 	const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
 
 	const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
 	const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 	const [selectedIndex, setSelectedIndex] = useState(0);
+	const [favorited, setFavorited] = useState(false);
 
 	const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
 		setPrevBtnDisabled(!emblaApi.canScrollPrev());
@@ -38,6 +50,16 @@ export default function SearchHanzi({
 		onSelect(emblaApi);
 		emblaApi.on("reinit", onSelect).on("select", onSelect);
 	}, [emblaApi, onSelect]);
+
+	useEffect(() => {
+		if (open) setFavorited(false);
+	}, [open]);
+
+	const handleFavorite = useCallback(async () => {
+		if (!user || chars.length === 0) return;
+		await favoriteChars(user.id, chars);
+		setFavorited(true);
+	}, [user, chars]);
 
 	return (
 		<Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -62,7 +84,20 @@ export default function SearchHanzi({
 						</Dialog.Close>
 
 						<Flex justify="between">
-							<Flex gap="2">
+							<Flex gap="2" align="center">
+								{user && (
+									<IconButton
+										size="1"
+										variant="ghost"
+										radius="full"
+										className="text-white! hover:bg-white/20!"
+										onClick={handleFavorite}
+										disabled={favorited}
+										aria-label={favorited ? "已收藏" : "收藏"}
+									>
+										{favorited ? <HeartFilledIcon /> : <HeartIcon />}
+									</IconButton>
+								)}
 								<IconButton
 									size="1"
 									variant="outline"
