@@ -29,8 +29,6 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 	);
 	if (!charData) return null;
 
-	console.log(`info`, info);
-
 	return (
 		<Flex
 			className="w-full"
