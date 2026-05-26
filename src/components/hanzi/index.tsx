@@ -90,7 +90,7 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 							</Text>
 						</Flex>
 					))}
-					<Text size="2">{info?.sentences?.join("； ")}</Text>
+					<Text size="2">{info?.sentences?.join("； ")}。</Text>
 				</Flex>
 			</Flex>
 		</Flex>
