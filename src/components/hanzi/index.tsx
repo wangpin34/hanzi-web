@@ -14,6 +14,8 @@ interface HanziInfo {
 	definitions: string;
 	definitions_en: string[] | string;
 	pinyin: string[];
+	sentences: string[];
+	words: Array<{ word: string; definition: string }>;
 }
 
 export default function Hanzi({ hanzi }: { hanzi: string }) {
@@ -23,7 +25,7 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 		error,
 		isLoading,
 	} = useSWR<HanziInfo>(
-		hanzi ? `/hanzi/explain?hanzi=${hanzi}` : null,
+		hanzi ? `/hanzi/${hanzi}` : null,
 		//@ts-ignore
 		client.get,
 	);
@@ -72,8 +74,24 @@ export default function Hanzi({ hanzi }: { hanzi: string }) {
 					<Bishun hanzi={hanzi} charData={charData} />
 				</Grid>
 			</Flex>
-			<Flex px="4" py="3">
-				<Text>{info?.definitions}</Text>
+			<Flex px="8" py="3" direction="column" className="w-full max-w-2xl">
+				<Text size="2">{info?.definitions}。</Text>
+				<Flex direction="column" gap="2" mt="3" align="start">
+					{info?.words?.map((w, i) => (
+						<Flex key={i} gap="4">
+							<Text
+								className="rounded-full bg-gray-200 text-gray-800 w-6 h-6 text-center leading-6"
+								size="2"
+							>
+								{i + 1}
+							</Text>
+							<Text size="2">
+								{w.definition}: {w.word}
+							</Text>
+						</Flex>
+					))}
+					<Text size="2">{info?.sentences?.join("； ")}</Text>
+				</Flex>
 			</Flex>
 		</Flex>
 	);
